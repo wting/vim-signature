@@ -462,6 +462,9 @@ function! signature#BufferMaps( mode ) "                                        
   " To prevent maps from being called again when re-entering a buffer
   if !exists('b:sig_map_set') | let b:sig_map_set = 0  | endif
 
+  echom "mode" a:mode
+  echom "sig_map_set" b:sig_map_set
+
   if ( a:mode && !b:sig_map_set ) "                                                   {{{
 
     " Create maps for toggling marks and markers
@@ -519,6 +522,7 @@ function! signature#BufferMaps( mode ) "                                        
     endif
 
     let b:sig_map_set = 1
+    echom "mappings set"
 
   " }}}
   elseif ( a:mode == 0 && b:sig_map_set ) "                                           {{{
@@ -540,6 +544,7 @@ function! signature#BufferMaps( mode ) "                                        
     silent! execute 'nunmap <buffer> ' . signature#MapKey( '<Plug>SIG_PrevMarkerByType', 'n' )
 
     let b:sig_map_set = 0
+    echom "mappings removed"
 
   endif " }}}
 endfunction
